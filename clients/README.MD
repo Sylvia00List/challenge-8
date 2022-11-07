@@ -1,8 +1,8 @@
 REACT
 
-Masuk ke folder clients: cd clients
-jalankan react: npm start
-react form create,update,search: http://localhost:3000/Players
+# Masuk ke folder clients: cd clients
+# jalankan react: npm start
+# react form create,update,search: http://localhost:3000/Players
 
 
 
