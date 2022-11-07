@@ -1,0 +1,367 @@
+openapi: 3.0.3
+info:
+  title: Swagger Binar Chapter 8
+  description: |-
+    Dokumentasi API dengan Swagger Chapter 8.
+  termsOfService: http://swagger.io/terms/
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://localhost:4000/api-docs/
+tags:
+  - name: Dokumentation API FSW Sylvia version
+    description: Chapter 8 
+    externalDocs:
+      description: Find out more 
+      url: http://swagger.io
+  - name: player
+    description: Access to Data Player
+    externalDocs:
+      description: Find out more about Data Player
+      url: http://swagger.io
+paths:
+  /player:
+    put:
+      tags:
+        - player
+      summary: Update an existing player
+      description: Update an existing player by Id
+      operationId: updatePlayer
+      requestBody:
+        description: Update an existent player
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player' 
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Player'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Player'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'         
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Player not found
+        '405':
+          description: Validation exception
+
+    post:
+      tags:
+        - player
+      summary: Add a new player
+      description: Add a new player 
+      operationId: addPlayer
+      requestBody:
+        description: Create a new player 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Player'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Player'
+        required: true
+      parameters: 
+          
+            in: body
+            name: player
+            description: The player to create.
+            schema: 
+              type: object
+              
+              properties: 
+                username: 
+                  type: string
+                
+                email: 
+                  type: string
+                
+                password: 
+                  type: string
+                
+                experience: 
+                  type: integer
+
+                level: 
+                  type: integer  
+                
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '405':
+          description: Invalid input
+
+  /player/{playerId}:
+    get:
+      tags:
+        - player
+      summary: Find player by ID
+      description: Returns a single player
+      operationId: getPlayerById
+      parameters:
+        - name: playerId
+          in: path
+          description: ID to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+
+        - name: username
+          in: query
+          description: The user name for login
+          required: false
+          schema:
+          type: string
+             
+        - name: email
+          in: query
+          description: email of player
+          schema:
+          type: string
+                
+        - name: password
+          in: query
+          description: password
+          schema:
+          type: string
+                
+        - name: experience
+          in: query
+          description: experience of player
+          schema:
+          type: integer
+
+        - name: level
+          in: query
+          description: level of player
+          schema:
+          type: integer      
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'         
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Player not found
+
+    post:
+      tags:
+        - player
+      summary: Updates a player with form data
+      description: ''
+      operationId: updateplayerWithForm
+      parameters:
+        - name: playerId
+          in: path
+          description: ID of player that needs to be updated
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: name
+          in: query
+          description: Name of player that needs to be updated
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Status ofplayer that needs to be updated
+          schema:
+            type: string
+      responses:
+        '405':
+          description: Invalid input
+
+    delete:
+      tags:
+        - player
+      summary: Deletes a player
+      description: delete a player
+      operationId: deletePlayer
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          description: Player id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid player value
+
+  /experience:
+    get:
+      tags:
+        - experience
+      summary: Returns player experience by status
+      description: Returns a map of status codes to quantities
+      operationId: getExperience
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: integer
+                  format: int32
+      security:
+        - api_key: []
+    put:
+      tags:
+        - experience
+      summary: Update an existing player experience
+      description: Update an existing player experience by Id
+      operationId: updateExperience
+      requestBody:
+        description: Update an existent player
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player' 
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Player'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Player'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'         
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Player not found
+        '405':
+          description: Validation exception  
+ 
+components:
+  schemas:
+    Player:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        playerId:
+          type: integer
+          format: int64
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        experience:
+          type: integer
+        level:
+          type: integer   
+        createDate:
+          type: string
+          format: date-time
+        upDate:
+          type: string
+          format: date-time  
+      xml:
+        name: order
+
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        username:
+          type: string
+          example: Dogs
+      xml:
+        name: category
+    
+    
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+      xml:
+        name: '##default'
+  requestBodies:
+    Player:
+      description: Player object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Player'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Player'
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'
+ 
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
