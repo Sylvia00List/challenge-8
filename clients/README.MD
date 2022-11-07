@@ -1,3 +1,13 @@
+REACT
+
+Masuk ke folder clients: cd clients
+jalankan react: npm start
+react form create,update,search: http://localhost:3000/Players
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
